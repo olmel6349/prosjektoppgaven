@@ -40,6 +40,26 @@ def oppgave_b(u_dag):
     #bruker matplotlib.pyplot til å vise stolpediagram
     plt.bar(["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag"], antall_per_uke_dag)
 
+#Funksjon som tar tid som string i input eks. ["00:00:59"] og returnerer float
+def tid_til_float(tids_str):
+    # Split stringen i en liste med time, minutter og sekunder
+    tid_liste = tids_str.split(":")
+    time, minutter, sekunder = int(tid_liste[0]), int(tid_liste[1]), int(tid_liste[2])
+    # Konverter til sum_sekunder (time * 3600 + minutter * 60 + sekunder)
+    sum_sekunder = time * 3600 + minutter * 60 + sekunder
+    return float(sum_sekunder)
+
+#Funksjon som tar tid som float i input og returnerer string eks: ["00:00:59"]
+def float_til_tid(float_tid):
+    # Konverter til sum_sekunder til int
+    sum_sekunder = int(float_tid)
+    # Kalkuler time, minutter og sekunder
+    time = sum_sekunder // 3600
+    minutter = (sum_sekunder % 3600) // 60
+    sekunder = sum_sekunder % 60
+    # Returer som string
+    return f"{time:02d}:{minutter:02d}:{sekunder:02d}"
+
 #Oppgave c
 def oppgave_c(varighet):
     print()
@@ -55,23 +75,49 @@ def oppgave_c(varighet):
 
     #looper gjennom varighet listen og populerer liste_samtale_tid_som_desimaler med float format
     for v in varighet:
-        arr = v.split(":")
-        desimal_string = f"{arr[1]}.{arr[2]}"
-        liste_samtale_tid_som_desimaler.append(float(desimal_string))
+        liste_samtale_tid_som_desimaler.append(tid_til_float(v))
 
     liste_samtale_tid_som_desimaler.sort() #sorterer listen fra lav til høy
 
     minste_samtale = liste_samtale_tid_som_desimaler[0] #henter ut korteste (minste) samtale
+    
+    minste_samtale = float_til_tid(minste_samtale) #bruker float_til_tid funksjonen for å endre fra float til tid
 
-    minste_samtale_liste = str(minste_samtale).split(".") #Lager en liste av korteste (minste) samtale, så det er enklere å skrive ut på en pen måte
+    minste_samtale_liste = str(minste_samtale).split(":") #Lager en liste av korteste (minste) samtale, så det er enklere å skrive ut på en pen måte
 
-    print(f"Minste samtale var på {minste_samtale_liste[0]} minutter og {minste_samtale_liste[1]} sekunder")
+    #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet    
+    if minste_samtale_liste[1].startswith("0"):
+        minste_samtale_liste[1] = int(minste_samtale_liste[1])
+    
+    #Hvis resulatet bikker en time
+    if minste_samtale_liste[0] != "00":
+        #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
+        if minste_samtale_liste[0].startswith("0"):
+            minste_samtale_liste[0] = int(minste_samtale_liste[0])
+        print(f"Gjennomsnitt tidsbruk på samtalene er {minste_samtale_liste[0]} timer {minste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
+    else:
+        #Hvis resultatet er under en time
+        print(f"Gjennomsnitt tidsbruk på samtalene er {minste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
 
     lengste_samtale = liste_samtale_tid_som_desimaler[-1] #henter ut lengste samtale
+    
+    lengste_samtale = float_til_tid(lengste_samtale) #bruker float_til_tid funksjonen for å endre fra float til tid
 
-    lengste_samtale_liste = str(lengste_samtale).split(".") #lager en liste av lengste samtale, så det er enklere å skrive ut på en pen måte
-
-    print(f"Lengste samtale var på {lengste_samtale_liste[0]} minutter og {lengste_samtale_liste[1]} sekunder")
+    lengste_samtale_liste = str(lengste_samtale).split(":") #lager en liste av lengste samtale, så det er enklere å skrive ut på en pen måte
+    
+    #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
+    if lengste_samtale_liste[1].startswith("0"):
+        lengste_samtale_liste[1] = int(lengste_samtale_liste[1])
+    
+    #Hvis resulatet bikker en time
+    if lengste_samtale_liste[0] != "00":
+        #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
+        if lengste_samtale_liste[0].startswith("0"):
+            lengste_samtale_liste[0] = int(lengste_samtale_liste[0])
+        print(f"Gjennomsnitt tidsbruk på samtalene er {lengste_samtale_liste[0]} timer {lengste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
+    else:
+        #Hvis resultatet er under en time
+        print(f"Gjennomsnitt tidsbruk på samtalene er {lengste_samtale_liste[1]} minutter og {lengste_samtale_liste[2]} sekunder")
 
     return liste_samtale_tid_som_desimaler
 
@@ -83,25 +129,37 @@ def oppgave_d(liste_samtale_tid_som_desimaler):
     #variabel som holder total varighet på samtalene
     total_tidsbruk = 0
 
-    #lopper gjennom liste_samtale_tid_som_desimaler og legger tid til total_tidsbruk
+    #lopper gjennom liste_samtale_tid_som_desimaler og legger tid til total_tidsbruk. Kunne også her brukt sum(liste_samtale_tid_som_desimaler)
     for tid in liste_samtale_tid_som_desimaler:
         total_tidsbruk += tid
 
     #finner gjennomsnittet ved å ta total_tidsbruk og dele på antall samtaler i liste_samtale_tid_som_desimaler
     gjennomsnitt = total_tidsbruk / len(liste_samtale_tid_som_desimaler)
+    
+    gjennomsnitt = float_til_tid(gjennomsnitt) #bruker float_til_tid funksjonen for å endre fra float til tid
 
-    gjennomsnitt_formatert = "{:.2f}".format(gjennomsnitt) #formaterer for finere ukskrift
-
-    gjennomsnitt_liste = gjennomsnitt_formatert.split(".") #splitter for å dele opp i minutter og sekunder
-
-    print(f"Gjennomsnitt tidsbruk på samtalene er {gjennomsnitt_liste[0]} minutter og {gjennomsnitt_liste[1]} sekunder")
+    gjennomsnitt_liste = gjennomsnitt.split(":") #splitter for å dele opp i minutter og sekunder
+    
+    #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
+    if gjennomsnitt_liste[1].startswith("0"):
+        gjennomsnitt_liste[1] = int(gjennomsnitt_liste[1])
+    
+    #Hvis resulatet bikker en time
+    if gjennomsnitt_liste[0] != "00":
+        #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
+        if gjennomsnitt_liste[0].startswith("0"):
+            gjennomsnitt_liste[0] = int(gjennomsnitt_liste[0])
+        print(f"Gjennomsnitt tidsbruk på samtalene er {gjennomsnitt_liste[0]} timer {gjennomsnitt_liste[1]} minutter og {gjennomsnitt_liste[2]} sekunder")
+    else:
+        #Hvis resultatet er under en time
+        print(f"Gjennomsnitt tidsbruk på samtalene er {gjennomsnitt_liste[1]} minutter og {gjennomsnitt_liste[2]} sekunder")
 
 #Oppgave e
 def oppgave_e(kl_slett):
     #liste som holder på klokkeslett som desimaler
     kL_slett_desimaler = []
 
-    #gjør om klokkeslett til float så de er enkelere å jobbe med
+    #gjør om klokkeslett til float så de er enkelere å jobbe med. Fjerner sekunder da dette ikke har noe å si
     for k in kl_slett:
         arr = k.split(":")
         desimal_string = f"{arr[0]}.{arr[1]}"
