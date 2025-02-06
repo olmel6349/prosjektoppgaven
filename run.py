@@ -42,23 +42,23 @@ def oppgave_b(u_dag):
 
 #Funksjon som tar tid som string i input eks. ["00:00:59"] og returnerer float
 def tid_til_float(tids_str):
-    # Split stringen i en liste med time, minutter og sekunder
+    # Split stringen i en liste med timer, minutter og sekunder
     tid_liste = tids_str.split(":")
-    time, minutter, sekunder = int(tid_liste[0]), int(tid_liste[1]), int(tid_liste[2])
-    # Konverter til sum_sekunder (time * 3600 + minutter * 60 + sekunder)
-    sum_sekunder = time * 3600 + minutter * 60 + sekunder
+    timer, minutter, sekunder = int(tid_liste[0]), int(tid_liste[1]), int(tid_liste[2])
+    # Konverter til sum_sekunder (timer * 3600 + minutter * 60 + sekunder)
+    sum_sekunder = timer * 3600 + minutter * 60 + sekunder
     return float(sum_sekunder)
 
 #Funksjon som tar tid som float i input og returnerer string eks: ["00:00:59"]
 def float_til_tid(float_tid):
     # Konverter til sum_sekunder til int
     sum_sekunder = int(float_tid)
-    # Kalkuler time, minutter og sekunder
-    time = sum_sekunder // 3600
+    # Kalkuler timer, minutter og sekunder
+    timer = sum_sekunder // 3600
     minutter = (sum_sekunder % 3600) // 60
     sekunder = sum_sekunder % 60
     # Returer som string
-    return f"{time:02d}:{minutter:02d}:{sekunder:02d}"
+    return f"{timer:02d}:{minutter:02d}:{sekunder:02d}"
 
 #Oppgave c
 def oppgave_c(varighet):
