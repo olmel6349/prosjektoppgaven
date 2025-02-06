@@ -94,10 +94,10 @@ def oppgave_c(varighet):
         #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
         if minste_samtale_liste[0].startswith("0"):
             minste_samtale_liste[0] = int(minste_samtale_liste[0])
-        print(f"Gjennomsnitt tidsbruk på samtalene er {minste_samtale_liste[0]} timer {minste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
+        print(f"Minste samtaletid er {minste_samtale_liste[0]} timer {minste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
     else:
         #Hvis resultatet er under en time
-        print(f"Gjennomsnitt tidsbruk på samtalene er {minste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
+        print(f"Minste samtaletid er {minste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
 
     lengste_samtale = liste_samtale_tid_som_desimaler[-1] #henter ut lengste samtale
     
@@ -114,10 +114,10 @@ def oppgave_c(varighet):
         #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
         if lengste_samtale_liste[0].startswith("0"):
             lengste_samtale_liste[0] = int(lengste_samtale_liste[0])
-        print(f"Gjennomsnitt tidsbruk på samtalene er {lengste_samtale_liste[0]} timer {lengste_samtale_liste[1]} minutter og {lengste_samtale_liste[2]} sekunder")
+        print(f"Lengste samtaletid er {lengste_samtale_liste[0]} timer {lengste_samtale_liste[1]} minutter og {lengste_samtale_liste[2]} sekunder")
     else:
         #Hvis resultatet er under en time
-        print(f"Gjennomsnitt tidsbruk på samtalene er {lengste_samtale_liste[1]} minutter og {lengste_samtale_liste[2]} sekunder")
+        print(f"Lengste samtaletid er {lengste_samtale_liste[1]} minutter og {lengste_samtale_liste[2]} sekunder")
 
     return liste_samtale_tid_som_desimaler
 
