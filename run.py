@@ -16,8 +16,8 @@ def oppgave_a():
     u_dag = data['Ukedag'].values #liste med ukedag
     kl_slett = data['Klokkeslett'].values #liste med klokkeslett
     varighet = data['Varighet'].values #liste med varighet
-    score = data['Tilfredshet'].values #liste med score
-    return u_dag, kl_slett, varighet, score
+    tilfredshet = data['Tilfredshet'].values #liste med tilfredshet
+    return u_dag, kl_slett, varighet, tilfredshet
 
 #Oppgave b
 def oppgave_b(u_dag):
@@ -170,18 +170,18 @@ def oppgave_e(kl_slett):
     plt.pie([aatte_til_ti, ti_til_tolv, tolv_til_to, to_til_fire], labels=kl_slett_labels)
 
 #Oppgave f
-def oppgave_f(score):
+def oppgave_f(tilfredshet):
     #variabler som holder på antallet av de forskjellige meningene
     positive_kunder = negative_kunder = passive_kunder = antall_kunder = 0
 
-    for s in score: #looper igjennom tilfredshet listen
-        if((s != s) == False): #fjerner de som er NaN
+    for t in tilfredshet: #looper igjennom tilfredshet listen
+        if((t != t) == False): #fjerner de som er NaN
             antall_kunder += 1 #teller opp antall kunder som har svart på undersøkelsen
-            if(s >= 9):
+            if(t >= 9):
                 positive_kunder += 1
-            elif(s >= 7 and s <= 8):
+            elif(t >= 7 and t <= 8):
                 passive_kunder += 1
-            elif(s <= 6):
+            elif(t <= 6):
                 negative_kunder += 1
 
     positive_kunder_prosentandel = positive_kunder / antall_kunder #prosentandel positive kunder
@@ -207,12 +207,12 @@ def oppgave_f(score):
 
 #Start funksjonen kjører alle funksjonene fra oppgave_a til oppgave_f
 def start():
-    u_dag, kl_slett, varighet, score = oppgave_a()
+    u_dag, kl_slett, varighet, tilfredshet = oppgave_a()
     oppgave_b(u_dag)
     liste_samtale_tid_som_desimaler = oppgave_c(varighet)
     oppgave_d(liste_samtale_tid_som_desimaler)
     oppgave_e(kl_slett)
-    oppgave_f(score)
+    oppgave_f(tilfredshet)
 
 #Kjører start funksjonen  
 start()
