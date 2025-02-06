@@ -60,6 +60,22 @@ def float_til_tid(float_tid):
     # Returer som string
     return f"{timer:02d}:{minutter:02d}:{sekunder:02d}"
 
+#Funksjon som tar inn utskrift_tekst (Minste, Lengste og Gjennomsnitt) og samtale_liste (timer, minutter, sekunder)
+def pen_utskrift_av_samtale(utskrift_tekst, samtale_liste):
+    #sjekker om minutter har ledene 0 og fjerner denne dersom det er tilfellet    
+    if samtale_liste[1].startswith("0"):
+        samtale_liste[1] = int(samtale_liste[1])
+    
+    #Hvis resulatet bikker en time
+    if samtale_liste[0] != "00":
+        #sjekker om timer har ledene 0 og fjerner denne dersom det er tilfellet
+        if samtale_liste[0].startswith("0"):
+            samtale_liste[0] = int(samtale_liste[0])
+        print(f"{utskrift_tekst} samtaletid er {samtale_liste[0]} timer {samtale_liste[1]} minutter og {samtale_liste[2]} sekunder")
+    else:
+        #Hvis resultatet er under en time
+        print(f"{utskrift_tekst} samtaletid er {samtale_liste[1]} minutter og {samtale_liste[2]} sekunder")
+
 #Oppgave c
 def oppgave_c(varighet):
     print()
@@ -84,41 +100,20 @@ def oppgave_c(varighet):
     minste_samtale = float_til_tid(minste_samtale) #bruker float_til_tid funksjonen for å endre fra float til tid
 
     minste_samtale_liste = str(minste_samtale).split(":") #Lager en liste av korteste (minste) samtale, så det er enklere å skrive ut på en pen måte
-
-    #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet    
-    if minste_samtale_liste[1].startswith("0"):
-        minste_samtale_liste[1] = int(minste_samtale_liste[1])
     
-    #Hvis resulatet bikker en time
-    if minste_samtale_liste[0] != "00":
-        #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
-        if minste_samtale_liste[0].startswith("0"):
-            minste_samtale_liste[0] = int(minste_samtale_liste[0])
-        print(f"Minste samtaletid er {minste_samtale_liste[0]} timer {minste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
-    else:
-        #Hvis resultatet er under en time
-        print(f"Minste samtaletid er {minste_samtale_liste[1]} minutter og {minste_samtale_liste[2]} sekunder")
+    #returnerer liste_samtale_tid_som_desimaler som blir brukt i neste metode
+    pen_utskrift_av_samtale("Minste", minste_samtale_liste)
 
     lengste_samtale = liste_samtale_tid_som_desimaler[-1] #henter ut lengste samtale
     
     lengste_samtale = float_til_tid(lengste_samtale) #bruker float_til_tid funksjonen for å endre fra float til tid
 
     lengste_samtale_liste = str(lengste_samtale).split(":") #lager en liste av lengste samtale, så det er enklere å skrive ut på en pen måte
-    
-    #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
-    if lengste_samtale_liste[1].startswith("0"):
-        lengste_samtale_liste[1] = int(lengste_samtale_liste[1])
-    
-    #Hvis resulatet bikker en time
-    if lengste_samtale_liste[0] != "00":
-        #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
-        if lengste_samtale_liste[0].startswith("0"):
-            lengste_samtale_liste[0] = int(lengste_samtale_liste[0])
-        print(f"Lengste samtaletid er {lengste_samtale_liste[0]} timer {lengste_samtale_liste[1]} minutter og {lengste_samtale_liste[2]} sekunder")
-    else:
-        #Hvis resultatet er under en time
-        print(f"Lengste samtaletid er {lengste_samtale_liste[1]} minutter og {lengste_samtale_liste[2]} sekunder")
 
+    #bruker pen_utskrift_av_samtale for normalisere utskrift på en pen måte  
+    pen_utskrift_av_samtale("Lengste", lengste_samtale_liste)
+
+    #returnerer liste_samtale_tid_som_desimaler som blir brukt i neste metode
     return liste_samtale_tid_som_desimaler
 
 #Oppgave d
@@ -140,19 +135,8 @@ def oppgave_d(liste_samtale_tid_som_desimaler):
 
     gjennomsnitt_liste = gjennomsnitt.split(":") #splitter for å dele opp i minutter og sekunder
     
-    #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
-    if gjennomsnitt_liste[1].startswith("0"):
-        gjennomsnitt_liste[1] = int(gjennomsnitt_liste[1])
-    
-    #Hvis resulatet bikker en time
-    if gjennomsnitt_liste[0] != "00":
-        #sjekker om resultatet har ledene 0 og fjerner denne dersom det er tilfellet
-        if gjennomsnitt_liste[0].startswith("0"):
-            gjennomsnitt_liste[0] = int(gjennomsnitt_liste[0])
-        print(f"Gjennomsnitt tidsbruk på samtalene er {gjennomsnitt_liste[0]} timer {gjennomsnitt_liste[1]} minutter og {gjennomsnitt_liste[2]} sekunder")
-    else:
-        #Hvis resultatet er under en time
-        print(f"Gjennomsnitt tidsbruk på samtalene er {gjennomsnitt_liste[1]} minutter og {gjennomsnitt_liste[2]} sekunder")
+    #bruker pen_utskrift_av_samtale for normalisere utskrift på en pen måte
+    pen_utskrift_av_samtale("Gjennomsnitt", gjennomsnitt_liste)
 
 #Oppgave e
 def oppgave_e(kl_slett):
