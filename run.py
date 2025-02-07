@@ -141,19 +141,19 @@ def oppgave_d(liste_samtale_tid_som_desimaler):
 #Oppgave e
 def oppgave_e(kl_slett):
     #liste som holder på klokkeslett som desimaler
-    kL_slett_desimaler = []
+    kl_slett_desimaler = []
 
     #gjør om klokkeslett til float så de er enkelere å jobbe med. Fjerner sekunder da dette ikke har noe å si
     for k in kl_slett:
-        arr = k.split(":")
-        desimal_string = f"{arr[0]}.{arr[1]}"
-        kL_slett_desimaler.append(float(desimal_string))
+        k_splittet = k.split(":")
+        desimal_klokkeslett = f"{k_splittet[0]}.{k_splittet[1]}"
+        kl_slett_desimaler.append(float(desimal_klokkeslett))
 
     #lager fire variabler som holder på intervalene
     aatte_til_ti = ti_til_tolv = tolv_til_to = to_til_fire = 0
 
-    #looper igjennom kL_slett_desimaler listen og tilordner variablene som holder på intervalene
-    for i in kL_slett_desimaler:
+    #looper igjennom kl_slett_desimaler listen og tilordner variablene som holder på intervalene
+    for i in kl_slett_desimaler:
         if(i >= 8.0 and i <= 09.59):
             aatte_til_ti += 1
         elif(i >= 10.00 and i <= 11.59):
